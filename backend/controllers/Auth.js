@@ -74,7 +74,7 @@ const validateOtp = async (req, res) => {
 
     // check if existing or new user 
     const userExist = await checkUserExists({ phoneNumber });
-    if (!userExist) {//debug
+    if (userExist) {
       // send email notifying existing user used calculator 
       console.log('Existing user');
       await sendEmail({
@@ -94,7 +94,7 @@ const validateOtp = async (req, res) => {
     else {
       // send email notifying new user used calculator
       console.log('new user')
-      await insertFreshClientData({ phoneNumber });//debug
+      await insertFreshClientData({ phoneNumber });
     }
     return res.status(200).json({ message: 'OTP verified successfully', data: { phoneNumber } });
   } catch (error) {
@@ -136,7 +136,7 @@ const googleCallback = async (req, res) => {
       // send email notifying existing user used calculator 
       console.log('Existing user');
       await sendEmail({
-        toAddress: 'calculator@niveshonline.com',//debug
+        toAddress: 'calculator@niveshonline.com',
         subject: 'Retirement Calculator usage detail',
         body: `User ${phoneNumber} used Retirement Savings Calculator on the web portal.`,
       })
