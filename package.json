@@ -1,7 +1,7 @@
 {
   "scripts": {
     "install-backend": "cd backend && npm install",
-    "install-frontend": "cd frontend && npm install",
+    "install-frontend": "cd frontend && npm install && npm install vite",
     "build-frontend": "cd frontend && npm run build",
     "start-backend": "cd backend && npm start",
     "start": "npm run build-frontend && npm run start-backend",
