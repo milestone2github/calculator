@@ -2,10 +2,11 @@
   "scripts": {
     "install-backend": "cd backend && npm install",
     "install-frontend": "cd frontend && npm install",
-    "install-vite": "npm install --save-dev vite",
+    "install-vite": "cd frontend && npm install vite --save-dev",
     "build-frontend": "cd frontend && npm run build",
     "start-backend": "cd backend && npm start",
-    "start": "npm run build-frontend && npm run start-backend",
-    "postinstall": "npm run install-vite && npm run install-backend && npm run install-frontend && npm run build-frontend"
+    "start": "npm run start-backend",
+    "postinstall": "npm run install-backend && npm run install-vite && npm run install-frontend",
+    "heroku-postbuild": "npm run build-frontend"
   }
 }
