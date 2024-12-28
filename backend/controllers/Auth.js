@@ -96,6 +96,14 @@ const validateOtp = async (req, res) => {
       console.log('new user')
       await insertFreshClientData({ phoneNumber });
     }
+
+    const encryptedPhone = btoa(phoneNumber);
+    res.cookie("phoneNumber", encryptedPhone, {
+      // httpOnly: true, // Prevent JavaScript access for security
+      secure: true,   // Send only over HTTPS
+      maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
+      sameSite: 'Strict', // Prevent CSRF attacks
+    });
     return res.status(200).json({ message: 'OTP verified successfully', data: { phoneNumber } });
   } catch (error) {
     console.error('Error validating OTP:', error.message);
@@ -152,6 +160,7 @@ const googleCallback = async (req, res) => {
     res.cookie("phoneNumber", encryptedPhone, {
       // httpOnly: true, // Prevent JavaScript access for security
       secure: true,   // Send only over HTTPS
+      maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
       sameSite: 'Strict', // Prevent CSRF attacks
     });
     res.redirect(`${process.env.FRONTEND_REDIRECT_URI}`);

@@ -57,7 +57,7 @@ function RetirementCalculator() {
   });
 
   document.title = 'Retirement Savings Calculator';
-  
+
   const showAlert = (type, message) => {
     setAlert({ type, message, visible: true });
     setTimeout(() => {
@@ -81,10 +81,8 @@ function RetirementCalculator() {
   };
 
   function shouldShowModal() {
-    const secretKey = btoa('phoneNumber');
     const phoneInCookies = Cookies.get('phoneNumber');
-    const phoneInLocalStorage = localStorage.getItem(secretKey)
-    return !(cid || phoneInLocalStorage || phoneInCookies);
+    return !(cid || phoneInCookies);
   }
 
   const calculateRetirementSavings = (e) => {
@@ -294,9 +292,6 @@ function RetirementCalculator() {
       throw new Error('Invalid OTP');
     }
     const responseData = await response.json();
-    const secretKey = btoa('phoneNumber');
-    const encryptedPhone = btoa(responseData?.data.phoneNumber);
-    localStorage.setItem(secretKey, encryptedPhone);
     setShouldShowResult(true);
   };
 
