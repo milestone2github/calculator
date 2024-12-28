@@ -56,6 +56,8 @@ function RetirementCalculator() {
     visible: false,
   });
 
+  document.title = 'Retirement Savings Calculator';
+  
   const showAlert = (type, message) => {
     setAlert({ type, message, visible: true });
     setTimeout(() => {
